@@ -203,6 +203,39 @@
     min-width: 375px;
   }
   .center {
+    padding-left: calc(50% - 500px);
+    padding-right: calc(50% - 500px);
+  }
+  .games-box {
+    height: 800px;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+  .games-box__game {
+    width: 343px;
+  }
+  .games-box__game-name {
+    left: 14px;
+  }
+  .game-1 {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    gap: 64px;
+  }
+  .game-1-box {
+    width: 400px;
+  }
+  .game-1__pict {
+    width: 400px;
+  }
+}
+
+@media (max-width: 1000px) {
+  body {
+    min-width: 375px;
+  }
+  .center {
     padding-left: calc(50% - 188px);
     padding-right: calc(50% - 188px);
   }
