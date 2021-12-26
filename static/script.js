@@ -69,6 +69,8 @@ function launchGameOne_2() {
         month = month.trim()  // убираем начальные и конечные пробелы
         if (month in months) {
             break;
+        } else if (month == "") {
+            continue;
         } else {
             alert("Неверный номер месяца");
         }        
