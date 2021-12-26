@@ -198,7 +198,7 @@
   width: 485px;
 }
 
-@media (max-width: 1240px) {
+@media (max-width: 1200px) {
   body {
     min-width: 375px;
   }
