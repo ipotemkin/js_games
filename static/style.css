@@ -203,8 +203,8 @@
     min-width: 375px;
   }
   .center {
-    padding-left: calc(50% - 500px);
-    padding-right: calc(50% - 500px);
+    padding-left: calc(50% - 393px);
+    padding-right: calc(50% - 393px);
   }
   .games-box {
     height: 800px;
@@ -240,7 +240,6 @@
     padding-right: calc(50% - 188px);
   }
   .top {
-    width: 375px;
     height: 496px;
     background-image: none;
     background: #000915;
