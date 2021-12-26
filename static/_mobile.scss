@@ -1,0 +1,105 @@
+// @media (max-width: 767px) {
+// to beautify the look
+  @media (max-width: 1240px) {
+    body {
+      min-width: 375px;
+  }
+
+  .center {
+      padding-left: calc(50% - 188px);
+      padding-right: calc(50% - 188px);
+    }
+    
+  .top {
+    width: 375px;
+    height: 496px;
+    background-image: none;
+    background: #000915;
+    background-image: url("./img/top_bcg_mobile.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    padding-top: 239px;
+  }
+
+  .top-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .heading {
+    width: 343px;
+    font-size: 32px;
+    line-height: 39px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .sub-heading {
+    width: 343px;
+    height: 66px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    /* or 157% */    
+  }
+
+  .games-box {
+    height: 1220px;
+    // width: 555px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+
+    &__game {
+      width: 343px;
+
+      &-name {
+        left: 14px;
+      }
+    }
+  }
+
+  .game-1 {
+    height: 654px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 64px;
+
+    &-box {
+        width: 344px;
+        align-items: center;
+        text-align: center;
+      }
+    
+    &__heading {
+      font-size: 32px;
+      line-height: 39px;
+    }
+
+    &__sub-heading {
+      font-size: 14px;
+      line-height: 22px;
+    }
+    
+    &__pict {
+      width: 344px; 
+    }
+  }
+
+}
+
+
+// to beautify the look
+@media (max-width: 375px) {
+  .center {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

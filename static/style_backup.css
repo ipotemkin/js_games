@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+}
+
+.top {
+    height: 1024px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) -7.35%, #000915 100%), url(0001.jpg);
+    background-image: url("./img/Rectangle 1.jpg");
+}
+
+.heading {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 64px;
+    line-height: 78px;
+    display: flex;
+    align-items: center;
+    
+    color: #FFFFFF;
+}
+
+
+.games-box {
+    height: 556px;
+    display: flex;
+    background: #000915;
+    justify-content: space-around;
+}
+
+.game {
+    width: 379px;
+    height: 300px;
+    background: linear-gradient(180deg, rgba(39, 1, 15, 0) 0%, #001944 100%), url(0023.jpg);
+    border-radius: 16px;
+}
