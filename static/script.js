@@ -82,3 +82,38 @@ function launchGameOne_2() {
     console.log(msg);  // выводим в консоль
     alert(msg);  // выводим на экран
 }
+
+
+function getRandomIndex(n) {
+    return Math.floor(Math.random() * n) + 1
+}
+
+// Game 2
+function launchGameTwo() {
+    let arr = ['Яблоко', 'Груша', 'Дыня', 'Виноград', 'Персик', 'Апельсин', 'Мандарин'];
+
+    newArr = arr.sort(() => Math.random() - 0.5);
+    arrLength = newArr.length;
+
+    firstWordIndex = getRandomIndex(arrLength);
+    do {
+        secondWordIndex = getRandomIndex(arrLength);
+    } while (secondWordIndex === firstWordIndex);
+
+    firstElement = newArr[firstWordIndex - 1].toLowerCase();
+    lastElement = newArr[secondWordIndex - 1].toLowerCase()
+
+    alert(`Запомните список: ${newArr}`)
+    // alert(`Попробуйте угадать, чему равнялся первый и последний элемент массива`);
+    userFirstElement = prompt(`Введите слово ${firstWordIndex} из списка`).toLowerCase();
+    userLastElement = prompt(`Введите слово ${secondWordIndex} из списка`).toLocaleLowerCase();
+
+    if ((userFirstElement === firstElement) && (userLastElement === lastElement)) {
+        alert("Поздравляю, Вы угадали!!!");
+    } else if ((userFirstElement === firstElement) || (userLastElement === lastElement)) {
+        alert("Вы были близки к победе!");
+    } else {
+        alert("К сожалению, вы не угадали");    
+    }
+
+}
