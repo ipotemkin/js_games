@@ -103,7 +103,7 @@ function launchGameTwo() {
     firstElement = newArr[firstWordIndex - 1].toLowerCase();
     lastElement = newArr[secondWordIndex - 1].toLowerCase()
 
-    alert(`Запомните список: ${newArr}`)
+    alert(`Запомните список:\n${newArr.join(", ")}`)
     // alert(`Попробуйте угадать, чему равнялся первый и последний элемент массива`);
     userFirstElement = prompt(`Введите слово ${firstWordIndex} из списка`).toLowerCase();
     userLastElement = prompt(`Введите слово ${secondWordIndex} из списка`).toLocaleLowerCase();
