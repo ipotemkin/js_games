@@ -62,8 +62,7 @@
         </div>
         <img class="game-1__pict" src="./static/img/game_1.svg" alt="Игра 1">
     </section>
-    <section class="game-2 center">
-        <img class="game-1__pict" src="./static/img/game_2.svg" alt="Игра 2">
+    <section class="game-1 center">
         <div class="game-1-box">
             <h2 class="game-1__heading">Запомни слова</h2>
             <div class="game-1__sub-heading">
@@ -73,6 +72,7 @@
             </div>
             <button onclick="launchGameTwo()" class="game-1__btn-go" type="submit">Играть!</button>
         </div>
+        <img class="game-1__pict" src="./static/img/game_2.svg" alt="Игра 2">
     </section>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
