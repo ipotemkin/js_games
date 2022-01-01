@@ -345,6 +345,7 @@
   .game-2__pict {
     width: 344px;
   }
+/*
   .game-2 {
     -webkit-box-orient: vertical;
     -webkit-box-direction: reverse;
@@ -352,6 +353,7 @@
             flex-direction: column-reverse;
     gap: 64px;
   }
+*/
 }
 
 @media (max-width: 375px) {
