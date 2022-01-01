@@ -21,26 +21,32 @@
                     </span>
                 </div>
             </div>
-            <button class="btn-go" type="submit">Поехали!</button>        
+            <a href="#games">
+                <button class="btn-go" type="submit">Поехали!</button>
+            </a>
         </div>
     </section>
-    <div class="games-box center">
-        <div class="games-box__game">
-            <picture>
-                <source media="(max-width: 1200px)" srcset="./static/img/game_1_mobile.png">
-                <source media="(min-width: 1201px)" srcset="./static/img/game_1.png">
-                <img src="./img/game_1.png" alt="Игра 1">
-            </picture>
-            <p class="games-box__game-name">Игра 1</p>  
-        </div>    
-        <div class="games-box__game">
-            <picture>
-                <source media="(max-width: 1200px)" srcset="./static/img/game_2_mobile.png">
-                <source media="(min-width: 1201px)" srcset="./static/img/game_2.png">
-                <img src="./img/game_2.png" alt="Игра 2">
-            </picture>
-            <p class="games-box__game-name">Игра 2</p>  
-        </div>    
+    <div class="games-box center" id="games">
+        <a href="#game1">
+            <div class="games-box__game">
+                <picture>
+                    <source media="(max-width: 1200px)" srcset="./static/img/game_1_mobile.png">
+                    <source media="(min-width: 1201px)" srcset="./static/img/game_1.png">
+                    <img src="./img/game_1.png" alt="Игра 1">
+                </picture>
+                <p class="games-box__game-name">Игра 1</p>
+            </div>
+        </a>
+        <a href="#game2">
+            <div class="games-box__game">
+                <picture>
+                    <source media="(max-width: 1200px)" srcset="./static/img/game_2_mobile.png">
+                    <source media="(min-width: 1201px)" srcset="./static/img/game_2.png">
+                    <img src="./img/game_2.png" alt="Игра 2">
+                </picture>
+                <p class="games-box__game-name">Игра 2</p>
+            </div>
+        </a>
         <div class="games-box__game">
             <picture>
                 <source media="(max-width: 1200px)" srcset="./static/img/game_3_mobile.png">
@@ -50,7 +56,7 @@
             <p class="games-box__game-name">Игра 3</p>  
         </div>    
     </div>
-    <section class="game-1 center">
+    <section class="game-1 center" id="game1">
         <div class="game-1-box">
             <h2 class="game-1__heading">Времена года!</h2>
             <div class="game-1__sub-heading">
@@ -62,7 +68,7 @@
         </div>
         <img class="game-1__pict" src="./static/img/game_1.svg" alt="Игра 1">
     </section>
-    <section class="game-2 center">
+    <section class="game-2 center" id="game2">
         <div class="game-2-box">
             <h2 class="game-2__heading">Запомни слова</h2>
             <div class="game-2__sub-heading">

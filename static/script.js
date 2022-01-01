@@ -105,8 +105,8 @@ function launchGameTwo() {
 
     alert(`Запомните список:\n${newArr.join(", ")}`)
     // alert(`Попробуйте угадать, чему равнялся первый и последний элемент массива`);
-    userFirstElement = prompt(`Введите слово ${firstWordIndex} из списка`).toLowerCase();
-    userLastElement = prompt(`Введите слово ${secondWordIndex} из списка`).toLocaleLowerCase();
+    userFirstElement = prompt(`Введите слово ${firstWordIndex} из списка`).trim().toLowerCase();
+    userLastElement = prompt(`Введите слово ${secondWordIndex} из списка`).trim().toLowerCase();
 
     if ((userFirstElement === firstElement) && (userLastElement === lastElement)) {
         alert("Поздравляю, Вы угадали!!!");
