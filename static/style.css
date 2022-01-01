@@ -138,9 +138,7 @@
           justify-content: space-between;
   background: #000915;
 }
-.game-2 {
-    flex-direction: row-reverse;
-}
+
 .game-1-box,
 .game-2-box {
   width: 584px;
@@ -153,6 +151,7 @@
           flex-direction: column;
   gap: 32px;
 }
+
 .game-1__heading,
 .game-2__heading {
   font-weight: bold;
@@ -204,6 +203,13 @@
 .game-1__pict,
 .game-2__pict {
   width: 485px;
+}
+
+.game-2 {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
 }
 
 @media (max-width: 1200px) {
@@ -345,15 +351,6 @@
   .game-1__pict,
   .game-2__pict {
     width: 344px;
-  }
-  .game-2 {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-/*
-    gap: 64px;
-*/
   }
 }
 
