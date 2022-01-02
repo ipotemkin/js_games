@@ -1,4 +1,3 @@
-
 function launchGameOne() {
     let season = "";
     let month = 0;
@@ -130,15 +129,15 @@ function httpGet(theUrl)
 
 // Game 3
 function launchGameThree() {
-    let words_count = 0
+    let words_count = 0;
     do {
         words_count = prompt("Введите количество слов (>=3 & <= 15)");
         if (words_count === null) { return; }
         words_count = parseInt(words_count);
         } while (words_count < 3 || words_count > 15 || isNaN(words_count));
 
-    re = /[\"\[\]\n]/g;
+//    re = /[\"\[\]\n]/g;
+    var re = new RegExp('[\\"\\n\\[\\]]', "g");
     arrClean = httpGet(`/words/${words_count}`).replace(re, '').split(",");
-
     memoryGame(arrClean);
 }
