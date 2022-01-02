@@ -2,3 +2,6 @@
 .DS_Store
 venv
 __pycache__
+create_data.py
+dictionary.py
+my_nouns_ru.csv

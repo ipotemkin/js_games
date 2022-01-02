@@ -1,12 +1,10 @@
 from flask import Flask, render_template, jsonify
-from dictionary import Dictionary
 from setup_db import db
 from model import Word
 from random import randint
 
 
 app = Flask(__name__)
-# app.config['WORDS'] = Dictionary()
 app.config['JSON_AS_ASCII'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///words.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
