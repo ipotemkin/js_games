@@ -88,26 +88,32 @@ function getRandomIndex(n) {
 }
 
 function memoryGame(arr) {
-    newArr = arr.sort(() => Math.random() - 0.5);
+    let newArr = arr.sort(() => Math.random() - 0.5);
     arrLength = newArr.length;
 
-    firstWordIndex = getRandomIndex(arrLength);
+    let firstWordIndex = getRandomIndex(arrLength);
+    let secondWordIndex;
     do {
         secondWordIndex = getRandomIndex(arrLength);
     } while (secondWordIndex === firstWordIndex);
 
-    firstElement = newArr[firstWordIndex - 1].toLowerCase();
-    lastElement = newArr[secondWordIndex - 1].toLowerCase();
+    let firstElement = newArr[firstWordIndex - 1].toLowerCase();
+    let lastElement = newArr[secondWordIndex - 1].toLowerCase();
 
-    enumArray = [];
-    for (i = 0; i < arrLength; i++) {
+    let enumArray = [];
+    for (let i = 0; i < arrLength; i++) {
         enumArray[i] = String(i + 1) + ". " + newArr[i];
     }
 
     alert(`Запомните список:\n${enumArray.join("\n")}`);
-//    alert(`Запомните список:\n${newArr.join(", ")}`);
-    userFirstElement = prompt(`Введите слово ${firstWordIndex} из списка`).trim().toLowerCase();
-    userLastElement = prompt(`Введите слово ${secondWordIndex} из списка`).trim().toLowerCase();
+
+    let userFirstElement = prompt(`Введите слово ${firstWordIndex} из списка`);
+    if (!userFirstElement) { return; }
+    userFirstElement = userFirstElement.trim().toLowerCase()
+
+    let userLastElement = prompt(`Введите слово ${secondWordIndex} из списка`)
+    if (!userLastElement) { return; }
+    userLastElement = userLastElement.trim().toLowerCase();
 
     if ((userFirstElement === firstElement) && (userLastElement === lastElement)) {
         alert("Поздравляю, Вы угадали!!!");
@@ -137,13 +143,13 @@ function launchGameThree() {
     let words_count = 0;
     do {
         words_count = prompt("Введите количество слов (>=3 & <= 15)");
-        if (words_count === null) { return; }
+        if (!words_count) { return; }
         words_count = parseInt(words_count);
-        } while (words_count < 3 || words_count > 15 || isNaN(words_count));
+    } while (words_count < 3 || words_count > 15 || isNaN(words_count));
 
 //    re = /[\"\[\]\n]/g;
 //    var re = new RegExp('[\\"\\n\\[\\]]', "g");
 //    arrClean = httpGet(`/words/${words_count}`).replace(re, '').split(",");
-    arrClean = JSON.parse(httpGet(`/words/${words_count}`));
+    let arrClean = JSON.parse(httpGet(`/words/${words_count}`));
     memoryGame(arrClean);
 }
