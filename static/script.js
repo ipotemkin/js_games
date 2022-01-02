@@ -97,9 +97,9 @@ function memoryGame(arr) {
     } while (secondWordIndex === firstWordIndex);
 
     firstElement = newArr[firstWordIndex - 1].toLowerCase();
-    lastElement = newArr[secondWordIndex - 1].toLowerCase()
+    lastElement = newArr[secondWordIndex - 1].toLowerCase();
 
-    alert(`Запомните список:\n${newArr.join(", ")}`)
+    alert(`Запомните список:\n${newArr.join(", ")}`);
     userFirstElement = prompt(`Введите слово ${firstWordIndex} из списка`).trim().toLowerCase();
     userLastElement = prompt(`Введите слово ${secondWordIndex} из списка`).trim().toLowerCase();
 
@@ -111,7 +111,6 @@ function memoryGame(arr) {
         alert("К сожалению, вы не угадали");
     }
 }
-
 
 // Game 2
 function launchGameTwo() {
