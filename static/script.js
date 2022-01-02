@@ -99,7 +99,13 @@ function memoryGame(arr) {
     firstElement = newArr[firstWordIndex - 1].toLowerCase();
     lastElement = newArr[secondWordIndex - 1].toLowerCase();
 
-    alert(`Запомните список:\n${newArr.join(", ")}`);
+    enumArray = [];
+    for (i = 0; i < arrLength; i++) {
+        enumArray[i] = String(i + 1) + ". " + newArr[i];
+    }
+
+    alert(`Запомните список:\n${enumArray.join("\n")}`);
+//    alert(`Запомните список:\n${newArr.join(", ")}`);
     userFirstElement = prompt(`Введите слово ${firstWordIndex} из списка`).trim().toLowerCase();
     userLastElement = prompt(`Введите слово ${secondWordIndex} из списка`).trim().toLowerCase();
 
