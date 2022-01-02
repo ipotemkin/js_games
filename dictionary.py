@@ -76,5 +76,6 @@ class Dictionary:
         return False
 
 
-words = Dictionary()
-print(words.get_random_words(5))
+if __name__ == "__main__":
+    words = Dictionary()
+    print(words.get_random_words(5))
