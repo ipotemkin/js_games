@@ -85,13 +85,10 @@ function launchGameOne_2() {
 
 
 function getRandomIndex(n) {
-    return Math.floor(Math.random() * n) + 1
+    return Math.floor(Math.random() * n) + 1;
 }
 
-// Game 2
-function launchGameTwo() {
-    let arr = ['Яблоко', 'Груша', 'Дыня', 'Виноград', 'Персик', 'Апельсин', 'Мандарин'];
-
+function memoryGame(arr) {
     newArr = arr.sort(() => Math.random() - 0.5);
     arrLength = newArr.length;
 
@@ -104,56 +101,6 @@ function launchGameTwo() {
     lastElement = newArr[secondWordIndex - 1].toLowerCase()
 
     alert(`Запомните список:\n${newArr.join(", ")}`)
-    // alert(`Попробуйте угадать, чему равнялся первый и последний элемент массива`);
-    userFirstElement = prompt(`Введите слово ${firstWordIndex} из списка`).trim().toLowerCase();
-    userLastElement = prompt(`Введите слово ${secondWordIndex} из списка`).trim().toLowerCase();
-
-    if ((userFirstElement === firstElement) && (userLastElement === lastElement)) {
-        alert("Поздравляю, Вы угадали!!!");
-    } else if ((userFirstElement === firstElement) || (userLastElement === lastElement)) {
-        alert("Вы были близки к победе!");
-    } else {
-        alert("К сожалению, вы не угадали");    
-    }
-
-}
-
-
-function httpGet(theUrl)
-{
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
-    xmlHttp.send( null );
-    return xmlHttp.response;
-}
-
-
-// Game 3
-function launchGameThree() {
-    let words_count = 0
-    do {
-        words_count = prompt("Введите количество слов (>=3 & <= 15)");
-        if (words_count === null) { return; }
-        words_count = parseInt(words_count);
-        } while (words_count < 3 || words_count > 15 || isNaN(words_count));
-
-
-    re = /[\"\[\]\n]/g;
-    arrClean = httpGet(`/words/${words_count}`).replace(re, '').split(",");
-
-    newArr = arrClean.sort(() => Math.random() - 0.5);
-    arrLength = newArr.length;
-
-    firstWordIndex = getRandomIndex(arrLength);
-    do {
-        secondWordIndex = getRandomIndex(arrLength);
-    } while (secondWordIndex === firstWordIndex);
-
-    firstElement = newArr[firstWordIndex - 1].toLowerCase();
-    lastElement = newArr[secondWordIndex - 1].toLowerCase()
-
-    alert(`Запомните список:\n${newArr.join(", ")}`)
-    // alert(`Попробуйте угадать, чему равнялся первый и последний элемент массива`);
     userFirstElement = prompt(`Введите слово ${firstWordIndex} из списка`).trim().toLowerCase();
     userLastElement = prompt(`Введите слово ${secondWordIndex} из списка`).trim().toLowerCase();
 
@@ -164,5 +111,34 @@ function launchGameThree() {
     } else {
         alert("К сожалению, вы не угадали");
     }
+}
 
+
+// Game 2
+function launchGameTwo() {
+    let arr = ['Яблоко', 'Груша', 'Дыня', 'Виноград', 'Персик', 'Апельсин', 'Мандарин'];
+    memoryGame(arr);
+}
+
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.response;
+}
+
+// Game 3
+function launchGameThree() {
+    let words_count = 0
+    do {
+        words_count = prompt("Введите количество слов (>=3 & <= 15)");
+        if (words_count === null) { return; }
+        words_count = parseInt(words_count);
+        } while (words_count < 3 || words_count > 15 || isNaN(words_count));
+
+    re = /[\"\[\]\n]/g;
+    arrClean = httpGet(`/words/${words_count}`).replace(re, '').split(",");
+
+    memoryGame(arrClean);
 }

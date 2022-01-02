@@ -18,5 +18,4 @@ def get_words_lst(x: int):
 
 
 if __name__ == '__main__':
-
     app.run()
