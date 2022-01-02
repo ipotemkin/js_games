@@ -136,7 +136,8 @@ function launchGameThree() {
         } while (words_count < 3 || words_count > 15 || isNaN(words_count));
 
 //    re = /[\"\[\]\n]/g;
-    var re = new RegExp('[\\"\\n\\[\\]]', "g");
-    arrClean = httpGet(`/words/${words_count}`).replace(re, '').split(",");
+//    var re = new RegExp('[\\"\\n\\[\\]]', "g");
+//    arrClean = httpGet(`/words/${words_count}`).replace(re, '').split(",");
+    arrClean = JSON.parse(httpGet(`/words/${words_count}`));
     memoryGame(arrClean);
 }
