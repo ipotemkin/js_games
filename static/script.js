@@ -107,12 +107,18 @@ function memoryGame(arr) {
 
     alert(`Запомните список:\n${enumArray.join("\n")}`);
 
-    let userFirstElement = prompt(`Введите слово ${firstWordIndex} из списка`);
-    if (!userFirstElement) { return; }
+    let userFirstElement = "";
+    do {
+        userFirstElement = prompt(`Введите слово ${firstWordIndex} из списка`);
+        if (userFirstElement === null) { return; }
+    } while (userFirstElement === "")
     userFirstElement = userFirstElement.trim().toLowerCase()
 
-    let userLastElement = prompt(`Введите слово ${secondWordIndex} из списка`)
-    if (!userLastElement) { return; }
+    let userLastElement = "";
+    do {
+        userLastElement = prompt(`Введите слово ${secondWordIndex} из списка`)
+        if (userLastElement === null) { return; }
+    } while (userLastElement === "")
     userLastElement = userLastElement.trim().toLowerCase();
 
     if ((userFirstElement === firstElement) && (userLastElement === lastElement)) {
@@ -143,7 +149,7 @@ function launchGameThree() {
     let words_count = 0;
     do {
         words_count = prompt("Введите количество слов (>=3 & <= 15)");
-        if (!words_count) { return; }
+        if (words_count === null) { return; }
         words_count = parseInt(words_count);
     } while (words_count < 3 || words_count > 15 || isNaN(words_count));
 
