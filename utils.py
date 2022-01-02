@@ -13,7 +13,8 @@ def read_words(filename: str):
         print(e)
 
 
-it = iter(read_words(DICTIONARY_FILE))
-print(next(it))
-print(next(it))
-print(next(it))
+if __name__ == "__main__":
+    it = iter(read_words(DICTIONARY_FILE))
+    print(next(it))
+    print(next(it))
+    print(next(it))
