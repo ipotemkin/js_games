@@ -137,14 +137,6 @@ function launchGameThree() {
         words_count = parseInt(words_count);
         } while (words_count < 3 || words_count > 15 || isNaN(words_count));
 
-//    let arrDirty = [];
-//    arrDirty = httpGet(`/words/${words_count}`).replace("[", "").replace("]", "")
-//    .replace("\n", "").split(",");
-//    let arrClean = arrDirty;
-//    let arrClean  = [];
-//    for (i = 0; i < arrDirty.length; i++) {
-//        arrClean[i] = arrDirty[i].replace("\"", "").replace("\"", "");
-//    }
 
     re = /[\"\[\]\n]/g;
     arrClean = httpGet(`/words/${words_count}`).replace(re, '').split(",");
