@@ -1,30 +1,59 @@
-from flask import Flask, render_template, jsonify
-from setup_db import db
 from model import Word
 from random import randint
 
-
-app = Flask(__name__)
-app.config['JSON_AS_ASCII'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///words.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.url_map.strict_slashes = False
-db.init_app(app)
-
-
-@app.route('/')
-def index():
-    return render_template('index.html')
+from fastapi import FastAPI, Request, Depends
+from fastapi.templating import Jinja2Templates
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, Session
+from uvicorn import run
 
 
-@app.route('/words/<int:x>')
-def get_words_lst(x: int):
+engine = create_engine(
+    f"sqlite:///words.db",
+    connect_args={"check_same_thread": False},
+    echo=False,
+)
+
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    except:  # noqa
+        db.rollback()
+    finally:
+        db.close()
+
+
+app = FastAPI(title='Games on FastAPI',
+              description='This is a learning project on JS and Fast API',
+              version='1.0.0')
+
+app.mount('/static', StaticFiles(directory='static'), name='static')
+
+templates = Jinja2Templates(directory='templates')
+
+
+@app.get('/', response_class=HTMLResponse)
+async def index(request: Request):
+    return templates.TemplateResponse('index.html', {'request': request})
+
+
+@app.get('/words/{x}')
+async def get_words_lst(x: int, db: Session = Depends(get_db)):
+    # print("in get_words_lst")
+    # print("x =", x)
     words_lst = []
     words_counter = 0
     while True:
         temp_pk = randint(2, 65000)
         try:
-            word = Word.query.get(temp_pk).word
+            word = db.query(Word).get(temp_pk).word
+            # word = Word.query.get(temp_pk).word
             if word in words_lst:
                 continue
             words_lst.append(word)
@@ -35,18 +64,59 @@ def get_words_lst(x: int):
             if words_counter >= x:
                 break
 
-    return jsonify(words_lst)
+    return words_lst
 
 
-def create_data(app, db):
-    with app.app_context():
-        db.create_all()
-
-
-@app.shell_context_processor
-def make_shell_context():
-    return {'db': db, 'Word': Word}
+# app = Flask(__name__)
+# app.config['JSON_AS_ASCII'] = False
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///words.db'
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# app.url_map.strict_slashes = False
+# db.init_app(app)
+#
+#
+# @app.route('/')
+# def index():
+#     return render_template('index.html')
+#
+#
+# @app.route('/words/<int:x>')
+# def get_words_lst(x: int):
+#     words_lst = []
+#     words_counter = 0
+#     while True:
+#         temp_pk = randint(2, 65000)
+#         try:
+#             word = Word.query.get(temp_pk).word
+#             if word in words_lst:
+#                 continue
+#             words_lst.append(word)
+#             words_counter += 1
+#         except Exception as e:
+#             print(e)
+#         finally:
+#             if words_counter >= x:
+#                 break
+#
+#     return jsonify(words_lst)
+#
+#
+# def create_data(app, db):
+#     with app.app_context():
+#         db.create_all()
+#
+#
+# @app.shell_context_processor
+# def make_shell_context():
+#     return {'db': db, 'Word': Word}
 
 
 if __name__ == '__main__':
-    app.run()
+    # app.run()
+    run(
+        "app:app",
+        host='localhost',
+        port=8000,
+        reload=True
+    )
+
