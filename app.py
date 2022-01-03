@@ -1,34 +1,37 @@
-from model import Word
+# from model import Word
 from random import randint
 
 from fastapi import FastAPI, Request, Depends
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, Session
+# from sqlalchemy import create_engine
+# from sqlalchemy.orm import sessionmaker, Session
 from uvicorn import run
 
 from databases import Database
 
 
-engine = create_engine(
-    f"sqlite:///words.db",
-    connect_args={"check_same_thread": False},
-    echo=False,
-)
+# engine = create_engine(
+#     f"sqlite:///words.db",
+#     connect_args={"check_same_thread": False},
+#     echo=False,
+# )
+#
+# SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-
-def get_db():
-    db = SessionLocal()
+async def get_db():
+    # db = SessionLocal()
+    await database.connect()
     try:
-        yield db
+        yield database
     except:  # noqa
-        db.rollback()
+        # database.rollback()
+        pass
     finally:
-        db.close()
+        await database.disconnect()
+        # db.close()
 
 
 app = FastAPI(title='Games on FastAPI',
@@ -43,6 +46,7 @@ try:
     database = Database("sqlite:///words.db")
 except Exception as e:
     print(e)
+    exit(2)
 
 
 @app.get('/', response_class=HTMLResponse)
@@ -51,7 +55,7 @@ async def index(request: Request):
 
 
 @app.get('/words/{x}')
-async def get_words_lst(x: int, db: Session = Depends(get_db)):
+async def get_words_lst(x: int, db: Database = Depends(get_db)):
     # print(0)
     # try:
     #     database = Database("sqlite:///words.db")
@@ -59,7 +63,7 @@ async def get_words_lst(x: int, db: Session = Depends(get_db)):
     #     print(e)
 
     # print(1)
-    await database.connect()
+    # await database.connect()
     # print(2)
     sql = "SELECT word FROM word WHERE id = :id"
 
@@ -71,7 +75,7 @@ async def get_words_lst(x: int, db: Session = Depends(get_db)):
         temp_pk = randint(2, 65000)
         try:
             # word = db.query(Word).get(temp_pk).word
-            res = await database.fetch_one(query=sql, values={"id": temp_pk})
+            res = await db.fetch_one(query=sql, values={"id": temp_pk})
             word = res[0]
             if word in words_lst:
                 continue
@@ -83,7 +87,7 @@ async def get_words_lst(x: int, db: Session = Depends(get_db)):
             if words_counter >= x:
                 break
 
-    await database.disconnect()
+    # await database.disconnect()
     return words_lst
 
 
