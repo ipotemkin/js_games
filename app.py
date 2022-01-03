@@ -9,6 +9,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
 from uvicorn import run
 
+from databases import Database
+
 
 engine = create_engine(
     f"sqlite:///words.db",
@@ -37,6 +39,11 @@ app.mount('/static', StaticFiles(directory='static'), name='static')
 
 templates = Jinja2Templates(directory='templates')
 
+try:
+    database = Database("sqlite:///words.db")
+except Exception as e:
+    print(e)
+
 
 @app.get('/', response_class=HTMLResponse)
 async def index(request: Request):
@@ -45,6 +52,17 @@ async def index(request: Request):
 
 @app.get('/words/{x}')
 async def get_words_lst(x: int, db: Session = Depends(get_db)):
+    # print(0)
+    # try:
+    #     database = Database("sqlite:///words.db")
+    # except Exception as e:
+    #     print(e)
+
+    # print(1)
+    await database.connect()
+    # print(2)
+    sql = "SELECT word FROM word WHERE id = :id"
+
     # print("in get_words_lst")
     # print("x =", x)
     words_lst = []
@@ -52,8 +70,9 @@ async def get_words_lst(x: int, db: Session = Depends(get_db)):
     while True:
         temp_pk = randint(2, 65000)
         try:
-            word = db.query(Word).get(temp_pk).word
-            # word = Word.query.get(temp_pk).word
+            # word = db.query(Word).get(temp_pk).word
+            res = await database.fetch_one(query=sql, values={"id": temp_pk})
+            word = res[0]
             if word in words_lst:
                 continue
             words_lst.append(word)
@@ -64,6 +83,7 @@ async def get_words_lst(x: int, db: Session = Depends(get_db)):
             if words_counter >= x:
                 break
 
+    await database.disconnect()
     return words_lst
 
 
