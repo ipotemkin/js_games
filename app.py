@@ -1,4 +1,4 @@
-from random import randint
+from random import randint, seed
 
 from fastapi import FastAPI, Request, Depends
 from fastapi.templating import Jinja2Templates
@@ -13,9 +13,10 @@ async def get_db():
     await database.connect()
     try:
         yield database
-    except:  # noqa
+    except Exception as e:
+        print(e)
         # database.rollback()
-        pass
+        await database.transaction().rollback()
     finally:
         await database.disconnect()
 
@@ -42,13 +43,13 @@ async def index(request: Request):
 
 @app.get('/words/{x}')
 async def get_words_lst(x: int, db: Database = Depends(get_db)):
+    seed(randint(0, 1000))
     sql = "SELECT word FROM word WHERE id = :id"
     words_lst = []
     words_counter = 0
     while True:
         temp_pk = randint(2, 65000)
         try:
-            # word = db.query(Word).get(temp_pk).word
             res = await db.fetch_one(query=sql, values={"id": temp_pk})
             word = res[0]
             if word in words_lst:
